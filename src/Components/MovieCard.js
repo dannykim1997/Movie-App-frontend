@@ -6,7 +6,7 @@ const MovieCard = (props) => {
       <Card raised className="card-size" style={{width: "325px"}}>
         <Card.Content> 
           <Card.Header>
-              {props.movie.name}
+              {props.movie.title}
           </Card.Header>
           <Image src={props.movie.poster_path} className="card-image"/>
           <Card.Description>
@@ -14,7 +14,7 @@ const MovieCard = (props) => {
               {props.movie.overview}
           </Card.Description> <br />   
           <Card.Meta >
-          <strong>Genre:</strong> {props.movie.genre}<br />  
+          {/* <strong>Genre:</strong> {props.movie.genre}<br />   */}
           </Card.Meta>
         </Card.Content>
       </Card>
