@@ -14,7 +14,8 @@ class App extends React.Component {
     fetch("http://localhost:3000/trendingmovies")
     .then(r => r.json())
     .then(data => {
-      this.setState({movies: data.movies})
+      // console.log(data.results)
+      this.setState({movies: data.results})
     })
   }
 
