@@ -61,8 +61,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        {/* <MovieContainer movies={this.state.movies} /> */}
-        {/* //   <ReviewContainer reviews={this.state.reviews} /> */}
 
         <Router>
           <Nav logged_in={this.state.logged_in} />
