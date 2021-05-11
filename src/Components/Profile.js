@@ -3,7 +3,7 @@ import React from 'react';
 class Profile extends React.Component {
 
   componentDidMount(){
-    fetch('http://localhost:3000/pets',{
+    fetch('http://localhost:3000/reviews',{
       method: 'GET',
       headers: {
         'token': this.props.token
