@@ -6,7 +6,6 @@ import MovieContainer from "./Container/MovieContainer";
 
 import Login from "./Components/Login";
 import Nav from "./Components/Nav";
-import Home from "./Components/Home";
 import Signup from "./Components/Signup";
 import Profile from "./Components/Profile";
 
@@ -35,7 +34,6 @@ class App extends React.Component {
     fetch("http://localhost:3000/movies")
       .then((r) => r.json())
       .then((json) => {
-        // console.log(data.results)
         this.setState({ movies: json.data });
       });
 
@@ -65,8 +63,6 @@ class App extends React.Component {
         <Router>
           <Nav logged_in={this.state.logged_in} />
           <Switch>
-            <Route exact path="/" component={Home} />
-            
             <Route exact path="/movies" component={() => <MovieContainer movies={this.state.movies} movieView={this.state.view} view={this.viewMovie} movie={this.state.currentMovie}  />} />
 
             <Route
