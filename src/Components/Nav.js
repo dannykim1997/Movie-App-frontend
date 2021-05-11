@@ -25,7 +25,10 @@ const Nav = ({ logged_in, history }) => {
         }
         {
           logged_in && (
+            <>
             <Menu.Item onClick={() => history.push('/logout')} name='logout' />
+            <Menu.Item onClick={() => history.push('/movies')} name='movies' />
+            </>
           )
         }
       </Menu>
