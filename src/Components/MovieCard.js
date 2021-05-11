@@ -2,12 +2,11 @@ import { Card, Image } from "semantic-ui-react";
 
 const MovieCard = (props) => {
 
-  const img_url = "https://image.tmdb.org/t/p/original"
     return (
 
       <Card raised className="card-size" style={{width: "325px"}}>
         <Card.Content> 
-          <Image src={`${img_url}` + props.movie.poster_path} className="card-image"/>
+          <Image src={props.movie.image} className="card-image"/>
           <Card.Header>
               {props.movie.title}
           </Card.Header>
