@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button, Segment } from "semantic-ui-react";
-import { withRouter } from 'react-router';
+import { withRouter } from "react-router";
 
 class Login extends Component {
   state = {
@@ -15,32 +15,28 @@ class Login extends Component {
   };
 
   handleSubmit = () => {
-    //
-    // Should pass in user_id once we get response from our API
-    //
-    fetch("http://localhost:3000/sessions", {
-      method: "POST",
+    fetch('http://localhost:3000/sessions',{
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type':'application/json'
       },
-      body: JSON.stringify({ user: { ...this.state } }),
+      body: JSON.stringify({ user: {...this.state} })
+    }).then(res => res.json())
+    .then(tokenObj => {
+      if(tokenObj.token){
+        localStorage.setItem('token',tokenObj.token)
+        this.props.handleLogin(tokenObj.token)
+        this.props.history.push('/')
+      }else{
+        alert('Login failed..')
+      }
     })
-      .then((res) => res.json())
-      .then((tokenObj) => {
-        if (tokenObj.token) {
-          localStorage.setItem("token", tokenObj.token);
-          this.props.handleLogin(tokenObj.token);
-          this.props.history.push("/");
-        } else {
-          alert("Login failed..");
-        }
-      });
-  };
 
+  }
   render() {
     return (
       <Segment className={"form-container"}>
-        <Form onSubmit={this.handleSubmit} autoComplete={"off"}>
+        <Form onSubmit={this.handleSubmit}>
           <Form.Field>
             <label>Username</label>
             <input
