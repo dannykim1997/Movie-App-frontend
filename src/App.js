@@ -66,6 +66,7 @@ class App extends React.Component {
           <Nav logged_in={this.state.logged_in} />
           <Switch>
             <Route exact path="/" component={Home} />
+            
             <Route exact path="/movies" component={() => <MovieContainer movies={this.state.movies} movieView={this.state.view} view={this.viewMovie} movie={this.state.currentMovie}  />} />
 
             <Route

@@ -56,9 +56,9 @@ class Signup extends React.Component {
             Signup
           </Button>
 
-          <Button as={'a'} href={'/login'} color={'teal'}>
+          {/* <Button as={'a'} href={'/login'} color={'teal'}>
             Login
-          </Button>
+          </Button> */}
         </Form>
       </Segment>
     )

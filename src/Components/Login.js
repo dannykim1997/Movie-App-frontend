@@ -26,7 +26,7 @@ class Login extends Component {
       if(tokenObj.token){
         localStorage.setItem('token',tokenObj.token)
         this.props.handleLogin(tokenObj.token)
-        this.props.history.push('/')
+        this.props.history.push('/movies')
       }else{
         alert('Login failed..')
       }
@@ -60,9 +60,9 @@ class Login extends Component {
             Login
           </Button>
 
-          <Button as={"a"} href={"/signup"} color={"teal"}>
+          {/* <Button as={"a"} href={"/signup"} color={"teal"}>
             Signup
-          </Button>
+          </Button> */}
         </Form>
       </Segment>
     );
