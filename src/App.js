@@ -29,41 +29,41 @@ class App extends React.Component {
     this.setState({ logged_in: true, token });
   };
 
-  Backend Requests
+ 
   getMovies = () => {
-    fetch("http://localhost:3000/trendingmovies")
+    fetch("http://localhost:3000/movies")
       .then((r) => r.json())
-      .then((data) => {
+      .then((json) => {
         // console.log(data.results)
-        this.setState({ movies: data.results });
+        this.setState({ movies: json.data});
       });
   };
 
- getReviews = () => {
-    fetch("http://localhost:3000/reviews")
-    .then(r => r.json())
-    .then(data => {
-      console.log(data)
-      this.setState({reviews: data})
-    })
-  }
+//  getReviews = () => {
+//     fetch("http://localhost:3000/reviews")
+//     .then(r => r.json())
+//     .then(json => {
+//       console.log(data)
+//       this.setState({reviews: json.data})
+//     })
+//   }
 
   componentDidMount = () => {
     this.getMovies();
-    this.getReviews()
+    // this.getReviews()
   };
 
   render() {
     return (
       <div className="App">
-        <MovieContainer movies={this.state.movies} />
-        <ReviewContainer reviews={this.state.reviews} />
+           {/* <MovieContainer movies={this.state.movies} /> */}
+      {/* //   <ReviewContainer reviews={this.state.reviews} /> */}
 
         <Router>
           <Nav logged_in={this.state.logged_in} />
           <Switch>
             <Route exact path="/" component={Home} />
-            {/* <Route exact path="/movies" component={Home} /> */}
+            <Route exact path="/movies" component={() => <MovieContainer movies={this.state.movies} />} />
 
             <Route
               path="/profile"
