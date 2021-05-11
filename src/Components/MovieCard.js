@@ -2,7 +2,7 @@ import { Card, Image } from "semantic-ui-react";
 
 const MovieCard = (props) => {
   return (
-    <Card raised className="card-size" style={{ width: "325px" }}>
+    <Card raised onClick={(e) => props.view(e, props.movie)} className="card-size" style={{ width: "325px" }}>
       <Card.Content>
         <Card.Header>{props.movie.attributes.title}</Card.Header>
         <Image src={props.movie.attributes.image} className="card-image" />
