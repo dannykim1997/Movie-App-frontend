@@ -2,6 +2,7 @@ import React from "react";
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 import MovieContainer from "./Container/MovieContainer";
+import ReviewContainer from "./Container/ReviewContainer"
 
 import Login from "./Components/Login";
 import Nav from './Components/Nav'
@@ -21,30 +22,42 @@ class App extends React.Component {
     logged_in: false,
     token: null,
     movies: [],
+    reviews: []
   };
 
   handleLogin = (token) => {
     this.setState({ logged_in: true, token });
   };
 
-  //Backend Requests
-  // getMovies = () => {
-  //   fetch("http://localhost:3000/trendingmovies")
-  //     .then((r) => r.json())
-  //     .then((data) => {
-  //       // console.log(data.results)
-  //       this.setState({ movies: data.results });
-  //     });
-  // };
+  Backend Requests
+  getMovies = () => {
+    fetch("http://localhost:3000/trendingmovies")
+      .then((r) => r.json())
+      .then((data) => {
+        // console.log(data.results)
+        this.setState({ movies: data.results });
+      });
+  };
 
-  // componentDidMount = () => {
-  //   this.getMovies();
-  // };
+ getReviews = () => {
+    fetch("http://localhost:3000/reviews")
+    .then(r => r.json())
+    .then(data => {
+      console.log(data)
+      this.setState({reviews: data})
+    })
+  }
+
+  componentDidMount = () => {
+    this.getMovies();
+    this.getReviews()
+  };
 
   render() {
     return (
       <div className="App">
-        {/* <MovieContainer movies={this.state.movies} /> */}
+        <MovieContainer movies={this.state.movies} />
+        <ReviewContainer reviews={this.state.reviews} />
 
         <Router>
           <Nav logged_in={this.state.logged_in} />
