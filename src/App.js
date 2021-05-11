@@ -22,6 +22,9 @@ class App extends React.Component {
     logged_in: false,
     token: null,
     movies: [],
+    currentMovie: {},
+    view: false,
+
   };
 
   handleLogin = (token) => {
@@ -44,7 +47,15 @@ class App extends React.Component {
 
   componentDidMount = () => {
     this.getMovies();
-    // this.getReviews()
+    // this.getReviews();
+  };
+
+  viewMovie = (e, movie) => {
+    e.stopPropagation()
+    this.setState({
+      currentMovie: movie,
+      view: true
+    });
   };
 
   render() {
@@ -57,12 +68,7 @@ class App extends React.Component {
           <Nav logged_in={this.state.logged_in} />
           <Switch>
             <Route exact path="/" component={Home} />
-
-            <Route
-              exact
-              path="/movies"
-              component={() => <MovieContainer movies={this.state.movies} />}
-            />
+            <Route exact path="/movies" component={() => <MovieContainer movies={this.state.movies} movieView={this.state.view} view={this.viewMovie} movie={this.state.currentMovie}  />} />
 
             <Route
               path="/profile"
