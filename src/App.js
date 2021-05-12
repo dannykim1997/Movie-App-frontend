@@ -7,7 +7,7 @@ import MovieContainer from "./Container/MovieContainer";
 import Login from "./Components/Login";
 import Nav from "./Components/Nav";
 import Signup from "./Components/Signup";
-import Profile from "./Components/Profile";
+import MyReviews from "./Components/MyReviews";
 
 import {
   BrowserRouter as Router,
@@ -31,21 +31,23 @@ class App extends React.Component {
   };
 
   getMovies = () => {
-    fetch("http://localhost:3000/movies")
+    fetch("http://localhost:3000/popularmovies")
       .then((r) => r.json())
       .then((json) => {
         this.setState({ movies: json.data });
       });
 
-    const authToken = localStorage.getItem("token");
-    if (authToken) {
-      this.setState({ logged_in: true, token: authToken });
-    }
+    
   };
 
   componentDidMount = () => {
     this.getMovies();
-    // this.getReviews();
+
+    const authToken = localStorage.getItem("token");
+    if (authToken) {
+      this.setState({ logged_in: true, token: authToken });
+    }
+
   };
 
   viewMovie = (e, movie) => {
@@ -66,10 +68,10 @@ class App extends React.Component {
             <Route exact path="/movies" component={() => <MovieContainer movies={this.state.movies} movieView={this.state.view} view={this.viewMovie} movie={this.state.currentMovie}  />} />
 
             <Route
-              path="/profile"
+              path="/myreviews"
               component={() => {
                 return this.state.logged_in ? (
-                  <Profile {...this.state} />
+                  <MyReviews movies={this.state.movies} />
                 ) : (
                   <Redirect to="/login" />
                 );
