@@ -14,7 +14,7 @@ const Nav = ({ logged_in, history }) => {
 
       <Menu secondary>
         <Menu.Item name='home' onClick={() => history.push('/')} />
-        <Menu.Item name='profile' onClick={() => history.push('/profile')} />
+        <Menu.Item name='my_reviews' onClick={() => history.push('/myreviews')} />
         {
           !logged_in && (
             <>
@@ -27,7 +27,6 @@ const Nav = ({ logged_in, history }) => {
           logged_in && (
             <>
             <Menu.Item onClick={() => history.push('/logout')} name='logout' />
-            {/* <Menu.Item onClick={() => history.push('/movies')} name='movies' /> */}
             </>
           )
         }

@@ -60,9 +60,6 @@ class Login extends Component {
             Login
           </Button>
 
-          {/* <Button as={"a"} href={"/signup"} color={"teal"}>
-            Signup
-          </Button> */}
         </Form>
       </Segment>
     );
