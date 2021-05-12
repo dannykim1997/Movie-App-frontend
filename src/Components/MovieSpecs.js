@@ -1,4 +1,5 @@
 import React from "react";
+import ReviewForm from "./ReviewForm";
 // import Reviews from "../Components/Reviews";
 
 const MovieSpecs = props => {
@@ -25,24 +26,29 @@ const MovieSpecs = props => {
                     {props.movie.attributes.overview}
                 <br />
             </p>
-            {/* <div> */}
+            <div>
             <strong>Reviews</strong>
-            <li>
-                {props.movie.attributes.reviews.map((review) => review.comment)}
-            </li>
-            {/* <button
+              {props.movie.attributes.reviews.map((review) => <li>{review.comment}</li>)}
+            <br />
+            {props.newReview ? <ReviewForm handleSubmit={props.handleSubmit} cancelReview={props.cancelReview}/> : null}
+            <br />
+            {!props.newReview ?
+            <button
               className="ui button fluid"
-              onClick={() => props.createReview()}
+              onClick={() => props.addReview()}
             >
-              Create Review
+              Leave a review
             </button>
+            :
+            null}
             </div>
+            <br />
             <button
               className="ui button fluid"
               onClick={() => props.goBack()}
             >
               Go Back
-            </button> */}
+            </button>
           </div>
         </div>
       </div>
