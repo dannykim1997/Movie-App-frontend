@@ -23,7 +23,7 @@ class App extends React.Component {
     movies: [],
     currentMovie: {},
     view: false,
-
+    newReview: false,
   };
 
   handleLogin = (token) => {
@@ -58,6 +58,25 @@ class App extends React.Component {
     });
   };
 
+  goBack = () => {
+    this.setState({
+      currentMovie: {},
+      view:false
+    });
+  };
+
+  addReview = () => {
+    this.setState({
+      newReview: !this.state.newReview
+    })
+  }
+
+  cancelReview = () => {
+    this.setState({
+      newReview: !this.state.newReview
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -65,7 +84,7 @@ class App extends React.Component {
         <Router>
           <Nav logged_in={this.state.logged_in} />
           <Switch>
-            <Route exact path="/movies" component={() => <MovieContainer movies={this.state.movies} movieView={this.state.view} view={this.viewMovie} movie={this.state.currentMovie}  />} />
+            <Route exact path="/movies" component={() => <MovieContainer movies={this.state.movies} movieView={this.state.view} view={this.viewMovie} movie={this.state.currentMovie} goBack={this.goBack} newReview={this.state.newReview} addReview={this.addReview} cancelReview={this.cancelReview} />} />
 
             <Route
               path="/myreviews"
