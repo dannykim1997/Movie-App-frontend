@@ -180,6 +180,7 @@ class App extends React.Component {
                   newReview={this.state.newReview}
                   addReview={this.addReview}
                   cancelReview={this.cancelReview}
+                  logged_in = {this.state.logged_in}
                 />
               )}
             />
