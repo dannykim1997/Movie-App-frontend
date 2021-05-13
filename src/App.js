@@ -21,6 +21,7 @@ class App extends React.Component {
   state = {
     logged_in: false,
     user: {},
+    reviews: [],
     movies: [],
     currentMovie: {},
     view: false,
@@ -28,7 +29,7 @@ class App extends React.Component {
   };
 
   handleLogin = (user) => {
-    this.setState({ logged_in: true, user });
+    this.setState({ logged_in: true, reviews: user.reviews });
   };
 
   getMovies = () => {
@@ -80,8 +81,12 @@ class App extends React.Component {
     console.log(review.id)
   }
 
-  handleDelete = (review) => {
-    console.log(review.id)
+  handleDelete = (deleteReview) => {
+    fetch('http://localhost:3000/reviews/' + deleteReview.id, {
+      method: 'DELETE',
+    })
+
+    this.setState({reviews: this.state.reviews.filter(review=> review !== deleteReview)})
   }
 
   render() {
@@ -121,7 +126,7 @@ class App extends React.Component {
               path="/myreviews"
               component={() => {
                 return this.state.logged_in ? (
-                  <MyReviews reviews={this.state.user.reviews} handleEdit={this.handleEdit} handleDelete={this.handleDelete}/>
+                  <MyReviews reviews={this.state.reviews} handleEdit={this.handleEdit} handleDelete={this.handleDelete}/>
                 ) : (
                   <Redirect to="/login" />
                 );
