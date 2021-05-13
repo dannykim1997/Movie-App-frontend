@@ -36,7 +36,7 @@ class Login extends Component {
   }
   render() {
     return (
-      <Segment className={"form-container"}>
+      <Segment className="form-container">
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
             <label>Username</label>

@@ -9,11 +9,23 @@
   padding: 20px !important;
 }
 
-.content {
-  color: #00b5ad !important;
-  font-family: cursive;
-}
-
 .form-container {
   width: 100%;
+}
+
+body {
+  background-color:#e1e5f2;
+}
+
+.content {
+  color: #1f7a8c;
+  font-size: 30pt;
+}
+
+.ui.icon.header{
+  padding-top: 10px;
+}
+
+.form-container{
+  max-width: 500px
 }

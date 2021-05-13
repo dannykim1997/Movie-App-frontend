@@ -163,7 +163,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Router>
-          <Nav logged_in={this.state.logged_in} />
+          <Nav logged_in={this.state.logged_in}/>
           <Switch>
             <Route
               exact
@@ -228,7 +228,7 @@ class App extends React.Component {
               component={() => {
                 localStorage.clear();
                 this.setState({ logged_in: false, user_id: null });
-                return <Redirect to="/" />;
+                return <Redirect to="/login" />;
               }}
             />
           </Switch>

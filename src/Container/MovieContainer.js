@@ -4,7 +4,7 @@ import MovieSpecs from "../Components/MovieSpecs";
 
 const MovieContainer = (props) => {
   return (
-    <div className="ui four stackable cards">
+    <div class="centered ui four stackable cards">
       {!props.movieView ? (
         props.movies.map((movie, id) => (
           <MovieCard movie={movie} key={id} view={props.view} />
