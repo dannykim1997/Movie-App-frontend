@@ -5,7 +5,7 @@ const Nav = ({ logged_in, history }) => {
 
   return (
     <>
-      <div className={'nav-bar-image'} onClick={() => history.push('/')}>
+      <div className={'nav-bar-image'} >
         <Header as='h2' icon textAlign='center'>
 
           <Header.Content>Kaiflix</Header.Content>

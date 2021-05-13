@@ -19,6 +19,7 @@ const MovieContainer = (props) => {
           addReview={props.addReview}
           cancelReview={props.cancelReview}
           view={props.view}
+          logged_in={props.logged_in}
         />
       )}
     </div>

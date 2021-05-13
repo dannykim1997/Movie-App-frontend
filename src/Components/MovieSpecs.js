@@ -29,7 +29,7 @@ const MovieSpecs = (props) => {
                 <li key={review.id}>{review.comment}</li>
               ))}
               <br />
-              {props.newReview ? (
+              {props.newReview && props.logged_in ? (
                 <ReviewForm
                 addNewReview={props.addNewReview}
                 user={props.user}
