@@ -8,7 +8,7 @@ const Nav = ({ logged_in, history }) => {
       <div className={'nav-bar-image'} onClick={() => history.push('/')}>
         <Header as='h2' icon textAlign='center'>
 
-          <Header.Content>My Movie Reviews</Header.Content>
+          <Header.Content>Kaiflix</Header.Content>
         </Header>
       </div>
 

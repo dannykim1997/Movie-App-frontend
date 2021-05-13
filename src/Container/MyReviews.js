@@ -35,7 +35,7 @@ class MyReviews extends React.Component {
 
   render() {
     return (
-      <div className="ui bulleted list">
+      <div class="ui bulleted list">
         <h2>My Reviews</h2>
         {!this.props.viewEdit ? this.props.reviews.map((review) => (
           <Review
