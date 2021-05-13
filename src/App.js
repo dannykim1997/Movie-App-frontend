@@ -42,6 +42,10 @@ class App extends React.Component {
 
   componentDidMount = () => {
     this.getMovies();
+    const lol = localStorage.getItem('lmao')
+    if (lol) {
+      this.setState({logged_in: true})
+    }
 
     // const authToken = localStorage.getItem("token");
     // if (authToken) {
@@ -84,10 +88,15 @@ class App extends React.Component {
   // }
 
   addNewReview = (newReviewObj) => {
-    console.log(newReviewObj);
-    this.setState({
-      reviews: this.state.reviews << newReviewObj
-    });
+    console.log(newReviewObj.data.attributes);
+    // this.setState({
+    //   reviews: [...this.state.reviews, newReviewObj]
+    // });
+    this.setState((prevState)=> {
+      const newReviews = [...prevState.reviews]
+      newReviews.push(newReviewObj.data.attributes)
+      return {reviews: newReviews}
+    })
   };
 
   handleEdit = (review) => {
@@ -105,6 +114,7 @@ class App extends React.Component {
   };
 
   render() {
+    console.log(this.state.logged_in)
     return (
       <div className="App">
         <Router>
