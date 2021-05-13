@@ -11,6 +11,8 @@ const MovieContainer = (props) => {
         ))
       ) : (
         <MovieSpecs
+        user={props.user}
+        addNewReview={props.addNewReview}
           movie={props.movie}
           goBack={props.goBack}
           newReview={props.newReview}

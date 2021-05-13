@@ -8,7 +8,6 @@ import Login from "./Components/Login";
 import Nav from "./Components/Nav";
 import Signup from "./Components/Signup";
 import MyReviews from "./Container/MyReviews";
-// import MovieSpecs from "./Components/MovieSpecs";
 
 import {
   BrowserRouter as Router,
@@ -22,6 +21,7 @@ class App extends React.Component {
     logged_in: false,
     user: {},
     reviews: [],
+    comment: "",
     movies: [],
     currentMovie: {},
     view: false,
@@ -29,7 +29,7 @@ class App extends React.Component {
   };
 
   handleLogin = (user) => {
-    this.setState({ logged_in: true, reviews: user.reviews });
+    this.setState({ logged_in: true, reviews: user.reviews, user: user });
   };
 
   getMovies = () => {
@@ -76,18 +76,33 @@ class App extends React.Component {
     });
   };
 
+  // handleFormOnChange = (e) => {
+  //   console.log(e.target.value)
+  //   this.setState({
+  //     comment: e.target.value,
+  //   });
+  // }
+
+  addNewReview = (newReviewObj) => {
+    console.log(newReviewObj);
+    this.setState({
+      reviews: this.state.reviews << newReviewObj
+    });
+  };
 
   handleEdit = (review) => {
-    console.log(review.id)
-  }
+    console.log(review.id);
+  };
 
   handleDelete = (deleteReview) => {
-    fetch('http://localhost:3000/reviews/' + deleteReview.id, {
-      method: 'DELETE',
-    })
+    fetch("http://localhost:3000/reviews/" + deleteReview.id, {
+      method: "DELETE",
+    });
 
-    this.setState({reviews: this.state.reviews.filter(review=> review !== deleteReview)})
-  }
+    this.setState({
+      reviews: this.state.reviews.filter((review) => review !== deleteReview),
+    });
+  };
 
   render() {
     return (
@@ -100,6 +115,8 @@ class App extends React.Component {
               path="/movies"
               component={() => (
                 <MovieContainer
+                  addNewReview={this.addNewReview}
+                  user={this.state.user}
                   movies={this.state.movies}
                   movieView={this.state.view}
                   view={this.viewMovie}
@@ -126,7 +143,11 @@ class App extends React.Component {
               path="/myreviews"
               component={() => {
                 return this.state.logged_in ? (
-                  <MyReviews reviews={this.state.reviews} handleEdit={this.handleEdit} handleDelete={this.handleDelete}/>
+                  <MyReviews
+                    reviews={this.state.reviews}
+                    handleEdit={this.handleEdit}
+                    handleDelete={this.handleDelete}
+                  />
                 ) : (
                   <Redirect to="/login" />
                 );

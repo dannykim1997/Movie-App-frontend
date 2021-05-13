@@ -15,10 +15,10 @@ class MyReviews extends React.Component {
     });
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("hi");
-  };
+  // handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("hi");
+  // };
 
   // componentDidMount() {
   //   fetch("http://localhost:3000/reviews", {

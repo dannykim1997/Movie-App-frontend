@@ -31,7 +31,10 @@ const MovieSpecs = (props) => {
               <br />
               {props.newReview ? (
                 <ReviewForm
-                  handleSubmit={props.handleSubmit}
+                addNewReview={props.addNewReview}
+                user={props.user}
+                  movie={props.movie}
+                  // handleSubmit={props.handleSubmit}
                   cancelReview={props.cancelReview}
                 />
               ) : null}
