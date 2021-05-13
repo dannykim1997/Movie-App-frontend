@@ -7,7 +7,8 @@ import MovieContainer from "./Container/MovieContainer";
 import Login from "./Components/Login";
 import Nav from "./Components/Nav";
 import Signup from "./Components/Signup";
-import MyReviews from "./Components/MyReviews";
+import MyReviews from "./Container/MyReviews";
+// import MovieSpecs from "./Components/MovieSpecs";
 
 import {
   BrowserRouter as Router,
@@ -19,15 +20,15 @@ import {
 class App extends React.Component {
   state = {
     logged_in: false,
-    token: null,
+    user: {},
     movies: [],
     currentMovie: {},
     view: false,
     newReview: false,
   };
 
-  handleLogin = (token) => {
-    this.setState({ logged_in: true, token });
+  handleLogin = (user) => {
+    this.setState({ logged_in: true, user });
   };
 
   getMovies = () => {
@@ -36,61 +37,91 @@ class App extends React.Component {
       .then((json) => {
         this.setState({ movies: json.data });
       });
-
-    
   };
 
   componentDidMount = () => {
     this.getMovies();
 
-    const authToken = localStorage.getItem("token");
-    if (authToken) {
-      this.setState({ logged_in: true, token: authToken });
-    }
-
+    // const authToken = localStorage.getItem("token");
+    // if (authToken) {
+    //   this.setState({ logged_in: true, token: authToken });
+    // }
   };
 
   viewMovie = (e, movie) => {
-    e.stopPropagation()
+    e.stopPropagation();
     this.setState({
       currentMovie: movie,
-      view: true
+      view: true,
     });
   };
 
   goBack = () => {
     this.setState({
       currentMovie: {},
-      view:false
+      view: false,
     });
   };
 
   addReview = () => {
     this.setState({
-      newReview: !this.state.newReview
-    })
-  }
+      newReview: !this.state.newReview,
+    });
+  };
 
   cancelReview = () => {
     this.setState({
-      newReview: !this.state.newReview
-    })
+      newReview: !this.state.newReview,
+    });
+  };
+
+
+  handleEdit = (review) => {
+    console.log(review.id)
+  }
+
+  handleDelete = (review) => {
+    console.log(review.id)
   }
 
   render() {
     return (
       <div className="App">
-
         <Router>
           <Nav logged_in={this.state.logged_in} />
           <Switch>
-            <Route exact path="/movies" component={() => <MovieContainer movies={this.state.movies} movieView={this.state.view} view={this.viewMovie} movie={this.state.currentMovie} goBack={this.goBack} newReview={this.state.newReview} addReview={this.addReview} cancelReview={this.cancelReview} />} />
+            <Route
+              exact
+              path="/movies"
+              component={() => (
+                <MovieContainer
+                  movies={this.state.movies}
+                  movieView={this.state.view}
+                  view={this.viewMovie}
+                  movie={this.state.currentMovie}
+                  goBack={this.goBack}
+                  newReview={this.state.newReview}
+                  addReview={this.addReview}
+                  cancelReview={this.cancelReview}
+                />
+              )}
+            />
+
+            {/* <Route>
+              exact path="/movies/:id" 
+              render={(routerProps) => {
+                let movie = this.state.movies.find(
+                  (movie) => Number(routerProps.match.params.id) === movie.id
+                );
+                return <MovieSpecs />;
+              }}
+            </Route> */}
 
             <Route
               path="/myreviews"
               component={() => {
                 return this.state.logged_in ? (
-                  <MyReviews movies={this.state.movies} />
+                  <MyReviews reviews={this.state.user.reviews} handleEdit={this.handleEdit} handleDelete={this.handleDelete}/>
                 ) : (
                   <Redirect to="/login" />
                 );
@@ -111,7 +142,7 @@ class App extends React.Component {
               path="/logout"
               component={() => {
                 localStorage.clear();
-                this.setState({ logged_in: false, token: null });
+                this.setState({ logged_in: false, user_id: null });
                 return <Redirect to="/" />;
               }}
             />

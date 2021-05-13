@@ -15,17 +15,18 @@ class Login extends Component {
   };
 
   handleSubmit = () => {
-    fetch('http://localhost:3000/sessions',{
+    fetch('http://localhost:3000/login',{
       method: 'POST',
       headers: {
         'Content-Type':'application/json'
       },
       body: JSON.stringify({ user: {...this.state} })
     }).then(res => res.json())
-    .then(tokenObj => {
-      if(tokenObj.token){
-        localStorage.setItem('token',tokenObj.token)
-        this.props.handleLogin(tokenObj.token)
+    .then(userObj => {
+      if(userObj){
+        // localStorage.setItem('token',tokenObj.token)
+        console.log(userObj)
+        this.props.handleLogin(userObj.data.attributes)
         this.props.history.push('/movies')
       }else{
         alert('Login failed..')
