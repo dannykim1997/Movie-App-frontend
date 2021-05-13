@@ -26,6 +26,8 @@ class App extends React.Component {
     currentMovie: {},
     view: false,
     newReview: false,
+    viewEdit: false,
+    currentReview: {},
   };
 
   handleLogin = (user) => {
@@ -42,10 +44,10 @@ class App extends React.Component {
 
   componentDidMount = () => {
     this.getMovies();
-    const lol = localStorage.getItem('lmao')
-    if (lol) {
-      this.setState({logged_in: true})
-    }
+    // const lol = localStorage.getItem('lmao')
+    // if (lol) {
+    //   this.setState({logged_in: true})
+    // }
 
     // const authToken = localStorage.getItem("token");
     // if (authToken) {
@@ -99,9 +101,52 @@ class App extends React.Component {
     })
   };
 
-  handleEdit = (review) => {
+  handleEditForm = (review) => {
     console.log(review.id);
+    this.setState({
+      currentReview: review,
+      viewEdit: !this.state.viewEdit
+    })
   };
+
+  cancelEditReview = () => {
+    this.setState({
+      viewEdit: !this.state.viewEdit,
+    });
+  };
+
+  handleEditOnChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  handleEdit = (e, review, editedComment) => {
+    e.preventDefault();
+
+    const updateReview = {
+      comment: editedComment,
+      user_id: review.user_id,
+      movie_id: review.movie_id,
+    };
+
+    fetch(`http://localhost:3000/reviews/${review.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(updateReview),
+    })
+      .then(res => res.json())
+      .then(updatedReview => {
+        console.log(updatedReview.data.attributes)
+        this.setState({
+          reviews: this.state.reviews.map(review => Number(review.id) === Number(updatedReview.data.attributes.id) ? updatedReview.data.attributes : review),
+          viewEdit: !this.state.viewEdit,
+        });
+      });
+  }
 
   handleDelete = (deleteReview) => {
     fetch("http://localhost:3000/reviews/" + deleteReview.id, {
@@ -155,8 +200,12 @@ class App extends React.Component {
                 return this.state.logged_in ? (
                   <MyReviews
                     reviews={this.state.reviews}
-                    handleEdit={this.handleEdit}
+                    handleEditForm={this.handleEditForm}
                     handleDelete={this.handleDelete}
+                    viewEdit={this.state.viewEdit}
+                    cancelEditReview={this.cancelEditReview}
+                    handleEdit={this.handleEdit}
+                    review={this.state.currentReview}
                   />
                 ) : (
                   <Redirect to="/login" />
