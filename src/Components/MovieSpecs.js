@@ -1,6 +1,6 @@
 import React from "react";
 import ReviewForm from "./ReviewForm";
-// import Reviews from "../Components/Reviews";
+
 
 const MovieSpecs = props => {
   return (
