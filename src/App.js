@@ -216,7 +216,7 @@ class App extends React.Component {
             />
 
             <Route
-              path="/"
+              exact path="/"
               // path="/login"
               component={() => <Login handleLogin={this.handleLogin} />}
             />
