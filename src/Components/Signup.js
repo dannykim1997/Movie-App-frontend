@@ -30,7 +30,7 @@ class Signup extends React.Component {
     .then(userObj => {
       if(userObj.id){
         // localStorage.setItem('token',tokenObj.token)
-        this.props.handleLogin(userObj.id)
+        alert('You are signed up. Please Login...')
         this.props.history.push('/')
       }else{
         alert('Signup failed..')

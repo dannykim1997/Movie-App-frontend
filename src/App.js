@@ -35,6 +35,7 @@ class App extends React.Component {
     this.setState({ logged_in: true, reviews: user.reviews, user: user });
   };
 
+
   getMovies = () => {
     fetch("http://localhost:3000/popularmovies")
       .then((r) => r.json())
