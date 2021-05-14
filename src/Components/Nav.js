@@ -18,7 +18,7 @@ const Nav = ({ logged_in, history }) => {
         {
           !logged_in && (
             <>
-              <Menu.Item onClick={() => history.push('/login')} name='login' />
+              <Menu.Item onClick={() => history.push('/')} name='login' />
               <Menu.Item onClick={() => history.push('/signup')} name='signup' />
             </>
           )

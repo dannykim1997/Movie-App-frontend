@@ -2,6 +2,7 @@ import React from "react";
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 import MovieContainer from "./Container/MovieContainer";
+// import MovieSpecs from "./Components/MovieSpecs";
 // import ReviewContainer from "./Container/ReviewContainer"
 
 import Login from "./Components/Login";
@@ -209,13 +210,14 @@ class App extends React.Component {
                     review={this.state.currentReview}
                   />
                 ) : (
-                  <Redirect to="/login" />
+                  <Redirect to="/" />
                 );
               }}
             />
 
             <Route
-              path="/login"
+              path="/"
+              // path="/login"
               component={() => <Login handleLogin={this.handleLogin} />}
             />
 
@@ -229,7 +231,7 @@ class App extends React.Component {
               component={() => {
                 localStorage.clear();
                 this.setState({ logged_in: false, user_id: null });
-                return <Redirect to="/login" />;
+                return <Redirect to="/" />;
               }}
             />
           </Switch>
